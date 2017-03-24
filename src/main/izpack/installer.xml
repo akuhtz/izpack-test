@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<izpack:installation version="5.0"
+                     xmlns:izpack="http://izpack.org/schema/installation"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+
+  <info>
+    <appname>My Application</appname>
+    <appsubpath>myapp</appsubpath>
+    <appversion>1.0</appversion>
+    <authors>
+      <author name="My Company" email="info@my-company.com"/>
+    </authors>
+    <url>http://www.my-company.com</url>
+    <javaversion>1.7</javaversion>
+    <!--uninstaller write="false"/-->
+    <writeinstallationinformation>false</writeinstallationinformation>
+    
+        <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7|izpack.windowsinstall.8|izpack.windowsinstall.10" />
+  </info>
+
+  <guiprefs width="800" height="600" resizable="no">
+    <modifier key="labelGap" value="2" />
+    <modifier key="useHeadingPanel" value="yes" />
+    <modifier key="useHeadingForSummary" value="yes" />
+    <modifier key="headingLineCount" value="1" />
+    <modifier key="headingFontSize" value="1.5" />
+    <modifier key="headingBackgroundColor" value="0x00ffffff" />
+  </guiprefs>
+  
+  <consoleprefs>
+    <detectTerminal>true</detectTerminal>
+  </consoleprefs>
+  
+    <resources>
+        <res id="shortcutSpec.xml" src="windows_shortcut_specification.xml"/>
+    </resources>
+
+  <locale>
+    <langpack iso3="eng"/>
+    <langpack iso3="deu"/>
+  </locale>
+
+  <panels>
+    <panel classname="TargetPanel" id="panel.target"/>
+    <panel classname="PacksPanel" id="panel.packs"/>
+    <panel classname="SummaryPanel"/>
+    <panel classname="InstallPanel"/>
+        <panel classname="ShortcutPanel" id="shortcutpanel" />
+    <panel classname="FinishPanel"/>
+  </panels>
+
+    <listeners>
+        <listener classname="SummaryLoggerInstallerListener" stage="install">
+        </listener>
+        <listener classname="RegistryInstallerListener" stage="install">
+            <os family="windows"/>
+        </listener>
+        <listener classname="RegistryUninstallerListener" stage="uninstall">
+            <os family="windows"/>
+        </listener>
+    </listeners>
+  
+  <packs>
+    <pack name="@{projectname}" required="yes" id="pack1.pack">
+      <description>Pack 1</description>
+      <fileset dir="xml">
+          <include name="*.xml"/>
+          <containsregexp expression=".*"/>
+      </fileset>
+    </pack>
+  </packs>
+  
+    <natives>
+        <native name="ShellLink.dll" type="izpack"/>
+        <native name="ShellLink_x64.dll" type="izpack"/>
+        <native type="izpack" name="WinSetupAPI.dll" uninstaller="true"/>
+        <native type="izpack" name="WinSetupAPI_x64.dll" uninstaller="true"/>
+        <native type="3rdparty" name="COIOSHelper.dll" uninstaller="true"/>
+        <native type="3rdparty" name="COIOSHelper_x64.dll" uninstaller="true"/>
+    </natives>
+
+</izpack:installation>

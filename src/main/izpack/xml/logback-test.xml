@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property file="${user.home}/.bidibwizardrc"/>
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+    <appender class="ch.qos.logback.core.ConsoleAppender" name="CONSOLE_A">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%p] %c [%t] - %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender class="ch.qos.logback.core.FileAppender" name="FILE">
+        <file>${logFilePath}/BiDiBWizard.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%p] %c [%t] - %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender class="ch.qos.logback.core.FileAppender" name="RXTX">
+        <file>${logFilePath}/BiDiBWizard-RXTX.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS}: %m%n</pattern>
+        </encoder>
+    </appender>
+    <logger additivity="false" level="INFO" name="TX">
+        <appender-ref ref="RXTX"/>
+    </logger>
+    <logger additivity="false" level="INFO" name="RX">
+        <appender-ref ref="RXTX"/>
+    </logger>
+    <logger level="DEBUG" name="org.bidib.wizard.mvc.pt"/>
+    <logger level="DEBUG" name="org.tigris.net"/>
+    <logger level="INFO" name="org.bidib.jbidibc.MessageReceiver"/>
+    <logger level="DEBUG" name="org.bidib.wizard.mvc.pomupdate"/>
+    <logger level="DEBUG" name="org.bidib.wizard.mvc.debug"/>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE_A"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
