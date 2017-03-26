@@ -8,7 +8,7 @@
     <shortcut applications="no" commandLine="" description="${projectname}" 
         desktop="yes" encoding="UTF-8" iconFile="$INSTALL_PATH/icons/pic1.ico" iconIndex="0" 
         initialState="normal" name="${projectname}-${projectversion}" programGroup="yes" 
-        startMenu="yes" startup="no" target="$INSTALL_PATH\logback-test.xml" 
+        startMenu="no" startup="no" target="$INSTALL_PATH\logback-test.xml" 
         terminal="false" type="Application" workingDirectory="$INSTALL_PATH">
         <createForPack name="${projectname}"/>
     </shortcut>
