@@ -13,8 +13,10 @@
     </authors>
     <url>http://www.my-company.com</url>
     <javaversion>1.7</javaversion>
-    <!--uninstaller write="false"/-->
+    <uninstaller write="false"/>
+    <!--
     <writeinstallationinformation>false</writeinstallationinformation>
+    -->
     
         <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7|izpack.windowsinstall.8|izpack.windowsinstall.10" />
   </info>
