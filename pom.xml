@@ -14,19 +14,12 @@
         <projectname>izpack-test</projectname>
         <projectversion>${project.version}</projectversion>
         <projectartifact>izpack-test</projectartifact>
-        <!--main-class>org.bidib.wizard.main.BiDiBWizard</main-class-->
+
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <build-timestamp>${maven.build.timestamp}</build-timestamp>
+        
+        <izpack.version>5.1.0-RC8-SNAPSHOT</izpack.version>
     </properties>
-    <!--
-    <dependencies>
-        <dependency>
-            <groupId>org.bidib.jbidib</groupId>
-            <artifactId>bidibwizard</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
-    -->
     <build>
         <resources>
             <resource>
@@ -142,7 +135,7 @@
             <plugin>
                 <groupId>org.codehaus.izpack</groupId>
                 <artifactId>izpack-maven-plugin</artifactId>
-                <version>5.1.0-RC7</version>
+                <version>${izpack.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
