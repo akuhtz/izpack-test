@@ -5,9 +5,9 @@
                      xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
 
   <info>
-    <appname>My Application</appname>
-    <appsubpath>myapp</appsubpath>
-    <appversion>1.0</appversion>
+    <appname>@{projectname}</appname>
+    <appsubpath>@{projectname}-@{projectversion}</appsubpath>
+    <appversion>@{projectversion}</appversion>
     <authors>
       <author name="My Company" email="info@my-company.com"/>
     </authors>
@@ -36,6 +36,7 @@
   
     <resources>
         <res id="shortcutSpec.xml" src="windows_shortcut_specification.xml"/>
+        <res id="UninstallerIcon" src="icons/pic1.ico"/>
     </resources>
 
   <locale>
@@ -70,6 +71,9 @@
           <include name="*.xml"/>
           <containsregexp expression=".*"/>
       </fileset>
+        <fileset dir="icons" override="true" targetdir="$INSTALL_PATH/icons">
+            <include name="*.*"/>
+        </fileset>
     </pack>
   </packs>
   

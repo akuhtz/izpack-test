@@ -18,7 +18,7 @@
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <build-timestamp>${maven.build.timestamp}</build-timestamp>
         
-        <izpack.version>5.1.0-RC8-SNAPSHOT</izpack.version>
+        <izpack.version>5.1.0</izpack.version>
     </properties>
     <build>
         <resources>
