@@ -9,16 +9,17 @@
     <appsubpath>@{projectname}-@{projectversion}</appsubpath>
     <appversion>@{projectversion}</appversion>
     <authors>
-      <author name="My Company" email="info@my-company.com"/>
+      <author name="My Company Test" email="info@my-company.com"/>
     </authors>
     <url>http://www.my-company.com</url>
-    <javaversion>1.7</javaversion>
+    <javaversion>1.8</javaversion>
     <uninstaller write="false"/>
     <!--
     <writeinstallationinformation>false</writeinstallationinformation>
     -->
-    
+    <!--
         <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7|izpack.windowsinstall.8|izpack.windowsinstall.10" />
+        -->
   </info>
 
   <guiprefs width="800" height="600" resizable="no">
@@ -38,19 +39,28 @@
         <res id="shortcutSpec.xml" src="windows_shortcut_specification.xml"/>
         <res id="UninstallerIcon" src="icons/pic1.ico"/>
     </resources>
+    
+    <variables>
+        <variable name="ShowCreateDirectoryMessage" value="false"/>
+        <variable name="replaceVar" value="Hello Replace" />
+    </variables>
 
   <locale>
     <langpack iso3="eng"/>
     <langpack iso3="deu"/>
   </locale>
+  
+  <logging level="OFF" />
 
   <panels>
-    <panel classname="TargetPanel" id="panel.target"/>
-    <panel classname="PacksPanel" id="panel.packs"/>
+        <panel classname="HelloPanel"/>
+  
+    <panel classname="TargetPanel" />
+    <panel classname="PacksPanel"/>
     <panel classname="SummaryPanel"/>
     <panel classname="InstallPanel"/>
-        <panel classname="ShortcutPanel" id="shortcutpanel" />
-    <panel classname="FinishPanel"/>
+<!--        <panel classname="ShortcutPanel" id="shortcutpanel" /> -->
+    <panel classname="SimpleFinishPanel"/>
   </panels>
 
     <listeners>
@@ -65,15 +75,51 @@
     </listeners>
   
   <packs>
-    <pack name="@{projectname}" required="yes" id="pack1.pack">
-      <description>Pack 1</description>
+    <pack name="SI Studio 6.3" required="yes" preselected="yes">
+ 				<description>Position your mouse over a component to see its description</description>      <!--
       <fileset dir="xml">
           <include name="*.xml"/>
           <containsregexp expression=".*"/>
       </fileset>
+        -->
         <fileset dir="icons" override="true" targetdir="$INSTALL_PATH/icons">
             <include name="*.*"/>
         </fileset>
+        
+        <!--
+        <executable targetfile="/usr/bin/chmod" os="unix" stage="postinstall" failure="warn" keep="true">
+            <args>
+                <arg value="-R"/>
+                <arg value="777"/>
+                <arg value="$INSTALL_PATH/"/>
+            </args>
+        </executable>
+        -->
+
+        <!-- copy the script -->
+        <fileset dir="plain" override="true" os="unix" targetdir="$INSTALL_PATH/plain">
+            <os name="unix"/>
+            <include name="postInstall.sh"/>
+        </fileset>
+        <executable targetfile="${INSTALL_PATH}/plain/postInstall.sh" stage="postinstall">
+            <os name="unix"/>
+            <args><arg value="${INSTALL_PATH}/"/></args>
+        </executable>
+        
+        <fileset dir="plain" override="true" os="unix" targetdir="$INSTALL_PATH/plain">
+            <os family="windows"/>
+            <include name="PostInstall.bat"/>
+        </fileset>
+        
+        <parsable targetfile="$INSTALL_PATH/plain/PostInstall.bat">
+            <os family="windows"/>
+        </parsable>
+
+        
+    </pack>
+    
+    <pack name="SI Studio 6.3 Test" required="no" preselected="no">
+ 				<description>Position your mouse over a component to see its description</description>
     </pack>
   </packs>
   
